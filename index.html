@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 
+    <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/base.js"></script>
+    <script src="/js/client.js"></script>
 
   </head>
-  <body>
-    <div class="Drop" id="drop-target"></div>
-    <canvas id="myCanvas"></canvas>
-
-<a id="download" download="myImage.jpg" href="" onclick="download_img(this);">Download to myImage.jpg</a>
+  <body class="Drop js-drop">
+    <canvas class="is-hidden js-canvas"></canvas>
+    <a href="#" class="Button is-hidden js-send" download="myImage.jpg">Download</a>
 
   </body>
 </html>
