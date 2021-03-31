@@ -22,7 +22,7 @@ const render = (src) => {
   image.onload = () => {
     onLoadImage(image) 
     showCanvas()
-    showButton()
+    showActions()
   }
 
   image.src = src
@@ -41,9 +41,9 @@ const showCanvas = () => {
   $canvas.classList.remove('is-hidden')
 }
 
-const showButton = () => {
-  let $button = getElement('.js-send')
-  $button.classList.remove('is-hidden')
+const showActions = () => {
+  let $actions = getElement('.js-actions')
+  $actions.classList.remove('is-hidden')
 }
 
 const showLines = () => {
@@ -65,11 +65,14 @@ const showLines = () => {
 
 const onLoadImage = (image) => {
   $canvas = getElement('.js-canvas')
-  $canvas.onclick = () => {
+  apply(image)
+
+  let $random = getElement('.js-random')
+
+  $random.onclick = () => {
     apply(image)
   }
 
-  apply(image)
 }
 
 const apply = (image) => {
