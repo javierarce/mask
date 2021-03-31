@@ -1,5 +1,5 @@
 let $canvas = undefined
-let MAX_HEIGHT = 500
+let MAX_HEIGHT = 1080
 
 const loadImage = (src) => {
   if (!src.type.match(/image.*/)){
@@ -32,7 +32,7 @@ const setupButton  = () => {
   let $button = getElement('.js-send')
 
   $button.onclick = () => {
-    $button.href = $canvas.toDataURL('image/jpg')
+    $button.href = $canvas.toDataURL('image/png')
   }
 }
 
@@ -44,6 +44,26 @@ const showCanvas = () => {
 const showButton = () => {
   let $button = getElement('.js-send')
   $button.classList.remove('is-hidden')
+}
+
+const showLines = () => {
+  $canvas = getElement('.js-canvas')
+
+  let ctx = $canvas.getContext('2d')
+
+  ctx.clearRect(0, 0, $canvas.width, $canvas.height)
+  ctx.save()
+  let width = 1080
+  $canvas.width = width
+  $canvas.height = MAX_HEIGHT
+
+  ctx.beginPath()
+  ctx.lineTo(100, 0)
+  ctx.lineTo(width, 0)
+  ctx.lineTo(width, MAX_HEIGHT)
+  ctx.lineTo(0, MAX_HEIGHT)
+  ctx.closePath()
+  ctx.stroke();
 }
 
 const onLoadImage = (image) => {
@@ -58,20 +78,17 @@ const onLoadImage = (image) => {
 
   ctx.clearRect(0, 0, $canvas.width, $canvas.height)
   ctx.save()
+
   $canvas.width = image.width
   $canvas.height = image.height
 
+  let width = image.width
+
   ctx.beginPath()
-  ctx.moveTo(10, 10)
-  ctx.lineTo(100, 30)
-  ctx.lineTo(180, 10)
-  ctx.lineTo(200, 60)
-  ctx.arcTo(180, 70, 120, 0, 10)
-  ctx.lineTo(200, 180)
-  ctx.lineTo(100, 150)
-  ctx.lineTo(70, 180)
-  ctx.lineTo(20, 130)
-  ctx.lineTo(50, 70)
+  ctx.lineTo(100, 64)
+  ctx.lineTo(width, 0)
+  ctx.lineTo(width, MAX_HEIGHT)
+  ctx.lineTo(0, MAX_HEIGHT)
   ctx.closePath()
   ctx.clip()
 
@@ -79,9 +96,10 @@ const onLoadImage = (image) => {
   ctx.restore()
 }
 
-
 const onLoad = () => {
   setupButton()
+  // showCanvas()
+  // showLines()
 
   let $target = getElement('.js-drop')
 
