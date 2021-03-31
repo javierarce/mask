@@ -53,22 +53,25 @@ const showLines = () => {
 
   ctx.clearRect(0, 0, $canvas.width, $canvas.height)
   ctx.save()
+
   let width = 1080
   $canvas.width = width
   $canvas.height = MAX_HEIGHT
 
-  ctx.beginPath()
-  ctx.lineTo(100, 0)
-  ctx.lineTo(width, 0)
-  ctx.lineTo(width, MAX_HEIGHT)
-  ctx.lineTo(0, MAX_HEIGHT)
-  ctx.closePath()
-  ctx.stroke();
+  ctx = applyTransformToContext(ctx, width, MAX_HEIGHT)
+  ctx.stroke()
 }
 
 const onLoadImage = (image) => {
   $canvas = getElement('.js-canvas')
+  $canvas.onclick = () => {
+    apply(image)
+  }
 
+  apply(image)
+}
+
+const apply = (image) => {
   if (image.height > MAX_HEIGHT) {
     image.width *= MAX_HEIGHT / image.height
     image.height = MAX_HEIGHT
@@ -83,17 +86,46 @@ const onLoadImage = (image) => {
   $canvas.height = image.height
 
   let width = image.width
+  let height = image.height
 
-  ctx.beginPath()
-  ctx.lineTo(100, 64)
-  ctx.lineTo(width, 0)
-  ctx.lineTo(width, MAX_HEIGHT)
-  ctx.lineTo(0, MAX_HEIGHT)
-  ctx.closePath()
+  ctx = applyTransformToContext(ctx, width, height)
   ctx.clip()
 
   ctx.drawImage(image, 0, 0)
   ctx.restore()
+}
+
+const applyTransformToContext = (ctx, width, height) => {
+  const TRANSFORMATIONS = [
+    [
+      [ 100, 64 ],
+      [ width, 0 ],
+      [ width, MAX_HEIGHT ],
+      [ 0, MAX_HEIGHT ]
+    ], [
+      [ 100, 0 ],
+      [ width, 0 ],
+      [ width, MAX_HEIGHT ],
+      [ 0, MAX_HEIGHT ]
+    ], [
+      [ 0, 0 ],
+      [ width, 0 ],
+      [ width, MAX_HEIGHT ],
+      [ 100, MAX_HEIGHT - 100 ]
+    ]
+  ]
+
+  let transformation = getRandomItem(TRANSFORMATIONS)
+
+  ctx.beginPath()
+
+  transformation.forEach((t) => {
+    ctx.lineTo(t[0], t[1])
+  })
+
+  ctx.closePath()
+
+  return ctx
 }
 
 const onLoad = () => {

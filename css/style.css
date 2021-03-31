@@ -68,11 +68,14 @@ a {
   border-radius: 4px;
   transition: all 250ms ease-in-out;
   z-index: 100;
+  box-shadow: 2px 2px 16px rgb(0 0 0 / 50%);
+  user-select: none;
 }
 
 .Drop__download:hover {
   background: #ddd;
   transform: scale(0.95);
+  box-shadow: 1px 1px 16px rgb(0 0 0 / 50%);
 }
 
 canvas {
