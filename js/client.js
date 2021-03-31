@@ -55,6 +55,7 @@ const showLines = () => {
   ctx.save()
 
   let width = 1080
+
   $canvas.width = width
   $canvas.height = MAX_HEIGHT
 
@@ -72,6 +73,8 @@ const onLoadImage = (image) => {
 }
 
 const apply = (image) => {
+
+  console.log(image.height, MAX_HEIGHT)
   if (image.height > MAX_HEIGHT) {
     image.width *= MAX_HEIGHT / image.height
     image.height = MAX_HEIGHT
@@ -91,7 +94,7 @@ const apply = (image) => {
   ctx = applyTransformToContext(ctx, width, height)
   ctx.clip()
 
-  ctx.drawImage(image, 0, 0)
+  ctx.drawImage(image, 0, 0, width, height)
   ctx.restore()
 }
 
