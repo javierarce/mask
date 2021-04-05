@@ -28,14 +28,6 @@ const render = (src) => {
   image.src = src
 }
 
-const setupButton  = () => {
-  let $button = getElement('.js-send')
-
-  $button.onclick = () => {
-    $button.href = $canvas.toDataURL('image/png')
-  }
-}
-
 const showCanvas = () => {
   let $canvas = getElement('.js-canvas')
   $canvas.classList.remove('is-hidden')
@@ -135,10 +127,6 @@ const applyTransformToContext = (ctx, width, height) => {
 }
 
 const onLoad = () => {
-  setupButton()
-  // showCanvas()
-  // showLines()
-
   let $target = getElement('.js-drop')
 
   $target.addEventListener('dragleave', (e) => {

@@ -34,16 +34,3 @@ const hideLoader = () => {
   $loader.classList.remove('is-visible')
 }
 
-const enableSubmitButton = () => {
-  const $button = getElement('.js-send')
-  $button.classList.remove('is-disabled')
-}
-
-const disableSubmitButton = () => {
-  const $button = getElement('.js-send')
-
-  if ($button) {
-    $button.classList.add('is-disabled')
-  }
-}
-
