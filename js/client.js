@@ -1,7 +1,8 @@
 let $canvas = undefined
 let MAX_HEIGHT = 1080
+let currentTransformation = 0
 
-const loadImage = (src) => {
+const loadImage = ($target, src) => {
   if (!src.type.match(/image.*/)){
     console.log("The dropped file is not an image: ", src.type)
     return
@@ -11,6 +12,11 @@ const loadImage = (src) => {
 
   reader.onload = (e) => {
     render(e.target.result)
+
+    setTimeout(() => {
+      $target.classList.remove('is-drop')
+      $target.classList.remove('is-dragover')
+    }, 500)
   }
 
   reader.readAsDataURL(src)
@@ -69,7 +75,6 @@ const onLoadImage = (image) => {
 
 const apply = (image) => {
 
-  console.log(image.height, MAX_HEIGHT)
   if (image.height > MAX_HEIGHT) {
     image.width *= MAX_HEIGHT / image.height
     image.height = MAX_HEIGHT
@@ -113,7 +118,8 @@ const applyTransformToContext = (ctx, width, height) => {
     ]
   ]
 
-  let transformation = getRandomItem(TRANSFORMATIONS)
+  let transformation = TRANSFORMATIONS[currentTransformation]
+  currentTransformation = (currentTransformation + 1) % TRANSFORMATIONS.length
 
   ctx.beginPath()
 
@@ -147,7 +153,7 @@ const onLoad = () => {
   $target.addEventListener('drop', (e) => {
     killEvent(e)
     if (e && e.dataTransfer && e.dataTransfer.files.length) {
-      loadImage(e.dataTransfer.files[0])
+      loadImage($target, e.dataTransfer.files[0])
       $target.classList.add('is-drop')
     }
   }, true)

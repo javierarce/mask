@@ -46,9 +46,14 @@ a {
   justify-content: center;
 }
 
+.Drop.is-dragover canvas {
+  transform: scale(0.95);
+}
+
 .Drop.is-dragover .Drop__info {
   opacity: 0;
   visibility: hidden;
+  transform: scale(0.95);
 }
 
 .Drop.is-dragover {
