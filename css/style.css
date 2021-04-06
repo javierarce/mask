@@ -74,7 +74,7 @@ a {
 canvas {
   position: absolute;
   max-height: 90%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   box-shadow: 1px 1px 16px rgb(0 0 0 / 50%);
   transition: all 250ms ease-in-out;
