@@ -83,6 +83,7 @@ canvas {
   border-radius: 4px;
   box-shadow: 1px 1px 16px rgb(0 0 0 / 50%);
   transition: all 250ms ease-in-out;
+  cursor: pointer;
 }
 
 button {

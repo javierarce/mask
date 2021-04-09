@@ -63,17 +63,21 @@ const showLines = () => {
 
 const onLoadImage = (image) => {
   $canvas = getElement('.js-canvas')
-  apply(image)
+
+  applyMaskToImage(image)
 
   let $random = getElement('.js-random')
 
-  $random.onclick = () => {
-    apply(image)
+  $canvas.onclick = () => {
+    applyMaskToImage(image)
   }
 
+  $random.onclick = () => {
+    applyMaskToImage(image)
+  }
 }
 
-const apply = (image) => {
+const applyMaskToImage = (image) => {
 
   if (image.height > MAX_HEIGHT) {
     image.width *= MAX_HEIGHT / image.height
